@@ -1,4 +1,4 @@
-.heading-box{
+.heading-box {
     position: relative;
     border: 1px solid #DA360A;
     background-color: #da370a3a;
@@ -8,27 +8,50 @@
     align-items: center;
     padding: 0px 5px;
     margin-left: 20px;
+    color: #fff;
+    padding: 5px 15px;
 }
-.heading-box 
-.dot{
+.heading{
+    margin-left: 0px !important;
+}
+.heading-box h1{
+    display: inline;
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: black;
+}
+.reviewheading{
+    margin: 0px auto;
+}
+.reviewheading h1{
+    display: inline;
+    font-size: 2rem;
+    font-weight: 200;
+    color: white;
+}
+.heading-box .dot {
     position: absolute;
     width: 3px;
     height: 3px;
     background-color: white;
 }
-.tl{
+
+.tl {
     top: -2px;
     left: -2px;
 }
-.tr{
+
+.tr {
     top: -2px;
     right: -2px;
 }
-.bl{
+
+.bl {
     bottom: -2px;
     left: -2px;
 }
-.br{
+
+.br {
     bottom: -2px;
     right: -2px;
 }
