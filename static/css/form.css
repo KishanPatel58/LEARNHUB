@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f0f;
+}
+
+.container {
+    width: 360px;
+    padding: 40px;
+    border-radius: 15px;
+    background: #1c1c1c;
+    box-shadow: 0 0 25px rgba(255, 136, 0, 0.15);
+}
+
+.container h2 {
+    text-align: center;
+    color: #ff8800;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #2a2a2a;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #ff8800;
+    box-shadow: 0 0 10px rgba(255, 136, 0, 0.4);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff8800;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #e67600;
+    box-shadow: 0 0 15px rgba(255, 136, 0, 0.6);
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.extra {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.extra a {
+    color: #ff8800;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.extra a:hover {
+    text-decoration: underline;
+}
+
+#emailmessage {
+    margin-top: 10px;
+    color: white;
+}
+
+#passwordmessage {
+    margin-top: 10px;
+    color: white;
+}
+
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    width: 100%;
+    padding-right: 40px;
+    /* space for icon */
+}
+
+#togglePassword {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+#togglePassword:hover {
+    color: #ff8800;
+}
