@@ -268,7 +268,7 @@ body {
     overflow: hidden;
 }
 
-.video-container video{
+.video-container video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -320,17 +320,131 @@ body {
     align-items: center;
     flex-direction: column;
     margin-top: 10rem;
-    background-color: #FFF3EF;
+    background-color: var(--dark-color);
     border-radius: 25px;
 }
 
 #courses .heading {
-    margin-top: 10rem;
+    margin-top: 1rem;
+}
+
+#courses .heading h1{
+    color: var(--light-color);
 }
 
 #courses .dot {
-    background-color: var(--dark-color) !important;
+    background-color: var(--light-color) !important;
 }
+
+/* course cards */
+
+.coursecard-container{
+    width: 100%;
+    height: auto;
+    overflow-x: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 25px;
+    gap: 15px;
+}
+
+.card {
+  width: 100%;
+  background: var(--dark-color);
+  border-radius: 20px;
+  overflow: hidden;
+  color: white;
+  transition: 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.303);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-content {
+  padding: 25px;
+}
+
+.tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tags span {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+h2 {
+  margin: 0 0 20px 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.price {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.new-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6a00;
+}
+
+.old-price {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.discount {
+  background: white;
+  color: black;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background: #ff6a00;
+  border: none;
+}
+/* course cards end */
 
 /* review section */
 
@@ -527,7 +641,7 @@ body {
     font-size: 30px;
 }
 
-.arrow i{
+.arrow i {
     color: #DA360A;
 }
 
