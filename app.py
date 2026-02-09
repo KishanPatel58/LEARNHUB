@@ -13,6 +13,9 @@ USER_DB = {
 @app.route('/')
 def index():  # <--- This name is what url_for('index') looks for
     return render_template('index.html')
+@app.route('/signup')
+def signup():  # <--- This name is what url_for('index') looks for
+    return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
