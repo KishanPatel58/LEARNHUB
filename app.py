@@ -26,6 +26,7 @@ def register():
         username = request.form["username"]
         email = request.form["email"]
         password = request.form["password"]
+        session["username"] = username
         hashed_password = generate_password_hash(password)
         cursor = db.cursor()
         cursor.execute(
@@ -59,7 +60,17 @@ def login():
         else:
             return "Invalid Email or Password"
     return render_template("signin.html")
-
+# course page
+@app.route("/frontend.html")
+def frontend():
+    session["coursename"] = "Frontend Domination"
+    username = session.get("username")
+    return render_template("frontend.html",username=username)
+@app.route("/course")
+def course():
+    coursename = session.get("coursename")
+    username = session.get("username")
+    return render_template("course.html",coursename=coursename,username=username)
 # Logout Route
 @app.route("/logout")
 def logout():

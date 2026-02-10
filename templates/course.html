@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/certificate.css">
+    <title>LearnHUB | {{coursename}}</title>
+</head>
+
+<body>
+    <div class="certificate-wrapper" id="certificateWrapper">
+        <div class="certificate" id="certificateContent">
+
+            <div class="cert-top">
+                <div class="company">
+                    <span class="logo"></span>
+                    <span>LearnHUB</span>
+                </div>
+            </div>
+
+            <h1 class="title">Certificate</h1>
+            <h3 class="subtitle">OF ACHIEVEMENT</h3>
+            <p class="presented">{{coursename}}</p>
+
+            <h2 class="username">{{ username }}</h2>
+
+            <p class="description">
+                For successfully completing the professional course with outstanding performance and dedication.
+            </p>
+
+            <div class="bottom-row">
+                <div>
+                    <p id="certDate"></p>
+                    <span class="label">DATE</span>
+                </div>
+
+                <div class="signature">
+                    <img src="../static/images/mysignature.png" width="120">
+                    <span class="label">SIGNATURE</span>
+                </div>
+            </div>
+
+            <div class="badge">
+                BEST<br>AWARD
+            </div>
+
+        </div>
+
+        <button class="download-btn" onclick="downloadCertificate()">
+            ⬇ Download Certificate
+        </button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        const certificate = document.getElementById("certificateWrapper");
+        certificate.style.display="flex"
+        certificate.style.flexDirection="column"
+        document.getElementById("certDate").innerText =
+            new Date().toLocaleDateString();
+
+        function downloadCertificate() {
+            const cert = document.getElementById("certificateContent");
+
+            html2canvas(cert).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "Certificate.png";
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
+</body>
+
+</html>
