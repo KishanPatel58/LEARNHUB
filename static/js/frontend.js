@@ -104,7 +104,6 @@ function checkCompletion() {
     }
 }
 
-
 // ==========================
 // Add Sidebar Download Button
 // ==========================
