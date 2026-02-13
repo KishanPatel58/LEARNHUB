@@ -56,10 +56,25 @@ It allows students to register, log in, access courses, and track course engagem
 
 ### Users Table
 Stores registered student data.
+```sql
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `contactno` varchar(10) DEFAULT NULL,
+  `course` varchar(200) DEFAULT NULL,
+  `email` varchar(254) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
 
 ### Courses Table
 Stores course name and visit count.
-
+```sql
+CREATE TABLE `course` (
+  `coursename` varchar(200) NOT NULL,
+  `studentenrolled` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
 ### Course Visits Table
 Prevents duplicate visit count per user.
 
