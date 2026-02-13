@@ -96,6 +96,6 @@ VALUES
 
 Clone the repository:
 ```sql
-1. git clone https://github.com/KishanPatel58/LEARNHUB.git
-2. cd LEARNHUB
+git clone https://github.com/KishanPatel58/LEARNHUB.git
+cd LEARNHUB
 ```
