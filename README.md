@@ -95,6 +95,7 @@ VALUES
 ⚙️ Installation Guide
 
 Clone the repository:
-
+```sql
 1. git clone https://github.com/KishanPatel58/LEARNHUB.git
 2. cd LEARNHUB
+```
