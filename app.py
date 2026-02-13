@@ -24,20 +24,20 @@ def home():
 def register():
     if request.method == "POST":
         username = request.form["username"]
+        contactno = request.form["contactno"]
         email = request.form["email"]
         password = request.form["password"]
         session["username"] = username
         hashed_password = generate_password_hash(password)
         cursor = db.cursor()
         cursor.execute(
-            "INSERT INTO users (username, email, password) VALUES (%s, %s, %s)",
-            (username, email, hashed_password)
+            "INSERT INTO users (username, email, password, contactno) VALUES (%s, %s, %s, %s)",
+            (username, email, hashed_password, contactno)
         )
         db.commit()
         cursor.close()
         session["user"] = username
         return redirect(url_for("home"))
-        print(username,email,password)
     return render_template("signup.html")
 
 # Login Route
@@ -46,7 +46,6 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-
         cursor = db.cursor(dictionary=True)
         cursor.execute(
             "SELECT * FROM users WHERE email=%s",
@@ -56,25 +55,264 @@ def login():
         cursor.close()
         if user and check_password_hash(user["password"], password):
             session["user"] = user["username"]
+            session["email"] = user["email"]
+            session["contactno"] = user["contactno"]
+            session["id"] = user["id"]
             return redirect(url_for("home"))
         else:
-            return "Invalid Email or Password"
+            return render_template("signin.html",errormessage="Invalid Email of Password..")
     return render_template("signin.html")
 # course page
 @app.route("/frontend.html")
 def frontend():
+
     session["coursename"] = "Frontend Domination"
     username = session.get("username")
-    return render_template("frontend.html",username=username)
+    user_id = session.get("id")
+    course_name = "Frontend Domination"
+
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="LHB"
+    )
+    cursor = db.cursor()
+
+    # Check if user already visited
+    cursor.execute(
+        "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
+        (user_id, course_name)
+    )
+    result = cursor.fetchone()
+
+    if not result:
+        # Insert visit record
+        cursor.execute(
+            "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
+            (user_id, course_name)
+        )
+
+        # Increase visit count
+        cursor.execute(
+            "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
+            (course_name,)
+        )
+
+        db.commit()
+
+    cursor.close()
+    db.close()
+
+    return render_template("frontend.html", username=username)
+
+# course page
+@app.route("/threejs.html")
+def three():
+
+    session["coursename"] = "Three.js Domination"
+    username = session.get("username")
+    user_id = session.get("id")
+    course_name = "Three.js Domination"
+
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="LHB"
+    )
+    cursor = db.cursor()
+
+    # Check if user already visited
+    cursor.execute(
+        "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
+        (user_id, course_name)
+    )
+    result = cursor.fetchone()
+
+    if not result:
+        # Insert visit record
+        cursor.execute(
+            "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
+            (user_id, course_name)
+        )
+
+        # Increase visit count
+        cursor.execute(
+            "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
+            (course_name,)
+        )
+
+        db.commit()
+
+    cursor.close()
+    db.close()
+
+    return render_template("threejs.html", username=username)
+
+# course page
+@app.route("/fullstack.html")
+def fullstack():
+
+    session["coursename"] = "Fullstack Development"
+    username = session.get("username")
+    user_id = session.get("id")
+    course_name = "Fullstack Development"
+
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="LHB"
+    )
+    cursor = db.cursor()
+
+    # Check if user already visited
+    cursor.execute(
+        "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
+        (user_id, course_name)
+    )
+    result = cursor.fetchone()
+
+    if not result:
+        # Insert visit record
+        cursor.execute(
+            "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
+            (user_id, course_name)
+        )
+
+        # Increase visit count
+        cursor.execute(
+            "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
+            (course_name,)
+        )
+
+        db.commit()
+
+    cursor.close()
+    db.close()
+
+    return render_template("fullstack.html", username=username)
+
+# course page
+@app.route("/dsa.html")
+def dsa():
+
+    session["coursename"] = "DSA with JS"
+    username = session.get("username")
+    user_id = session.get("id")
+    course_name = "DSA with JS"
+
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="LHB"
+    )
+    cursor = db.cursor()
+
+    # Check if user already visited
+    cursor.execute(
+        "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
+        (user_id, course_name)
+    )
+    result = cursor.fetchone()
+
+    if not result:
+        # Insert visit record
+        cursor.execute(
+            "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
+            (user_id, course_name)
+        )
+
+        # Increase visit count
+        cursor.execute(
+            "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
+            (course_name,)
+        )
+
+        db.commit()
+
+    cursor.close()
+    db.close()
+
+    return render_template("dsa.html", username=username)
+
+# course page
+@app.route("/backend.html")
+def backend():
+
+    session["coursename"] = "Backend Development"
+    username = session.get("username")
+    user_id = session.get("id")
+    course_name = "Backend Development"
+
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="LHB"
+    )
+    cursor = db.cursor()
+
+    # Check if user already visited
+    cursor.execute(
+        "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
+        (user_id, course_name)
+    )
+    result = cursor.fetchone()
+
+    if not result:
+        # Insert visit record
+        cursor.execute(
+            "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
+            (user_id, course_name)
+        )
+
+        # Increase visit count
+        cursor.execute(
+            "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
+            (course_name,)
+        )
+
+        db.commit()
+
+    cursor.close()
+    db.close()
+
+    return render_template("backend.html", username=username)
+
 @app.route("/course")
 def course():
     coursename = session.get("coursename")
-    username = session.get("username")
+    username = session.get("user")
     return render_template("course.html",coursename=coursename,username=username)
+@app.route("/profile")
+def profile():
+    username = session.get("user")
+    email = session.get("email")
+    contactno = session.get("contactno")
+    return render_template("profile.html",username=username,email=email,contactno=contactno)
 # Logout Route
 @app.route("/logout")
 def logout():
-    session.pop("user", None)
-    return redirect(url_for("login"))
+    if 'email' in session:
+        email = session['email']
+
+        db = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="LHB"
+        )
+        cursor = db.cursor()
+        # Delete that specific user
+        cursor.execute("DELETE FROM users WHERE email = %s", (email,))
+        db.commit()
+        cursor.close()
+        db.close()
+        # Clear session
+        session.pop('email', None)
+    return redirect(url_for('login'))
 if __name__ == "__main__":
     app.run(debug=True)

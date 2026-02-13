@@ -14,3 +14,16 @@ window.addEventListener("scroll", () => {
 
     lastScrollY = currentScrollY;
 });
+
+const menu = document.getElementById("usernames")
+const profilemenu = document.getElementById("profile-menu")
+const closebutton = document.querySelector(".closebutton")
+menu.addEventListener("click",(e)=>{
+    e.preventDefault();
+    profilemenu.style.display="flex";
+    profilemenu.style.top=`60px`   
+    profilemenu.style.right=`5px`   
+})
+closebutton.addEventListener("click",()=>{
+    profilemenu.style.display="none"
+})

@@ -33,6 +33,12 @@
                 </a>
             </li>
             <li>
+                <a href="#review-section">
+                    <span class="text top">Review</span>
+                    <span class="text bottom">Review</span>
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <span class="text top">Request Callback</span>
                     <span class="text bottom">Request Callback</span>
@@ -42,12 +48,18 @@
         <div class="right-nav">
             {% if user %}
 
-            <a href="/logout" title="logout">{{user}}</a>
+            <a href="" id="usernames" title="logout">{{user}}</a>
             {% else %}
             <a href="/login">Login</a>
             {% endif %}
         </div>
     </nav>
+    <div class="menu" id="profile-menu">
+        <h1 class="closebutton" style="color: white;"><i class="ri-close-circle-line"></i></h1>
+        <h3 onclick="window.location.href='/profile'">Profile <i class="ri-shield-user-line"></i></h3>
+        <hr class="menu-devider">
+        <h1 class="logout" onclick="window.location.href='/logout'">Logout</h1>
+    </div>
 
     <section id="HeroSection">
         <div class="blob"></div>
@@ -114,9 +126,8 @@
         <div class="coursecard-container">
 
         </div>
-        <a href="" style="color: white;">View More courses <i class="ri-arrow-right-long-fill"></i></a>
     </section>
-    <section class="reviews">
+    <section class="reviews" id="review-section">
         <span class="heading-box reviewheading">
             <h1>What our <span>Students</span> say ?</h1>
             <span class="dot tl"></span>
@@ -144,6 +155,9 @@
             <!-- dynamic by javascript -->
 
         </div>
+    </section>
+    <section id="footer">
+        <p>M@de by <span>LearnHub</span> & Team</p>
     </section>
     <script src="../static/js/script.js"></script>
     <script src="../static/js/review.js"></script>

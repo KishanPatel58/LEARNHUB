@@ -31,7 +31,49 @@ body {
     font-family: var(--sans-serif);
 }
 
-/*  */
+/* font declaration */
+
+@font-face {
+    font-family: "font1";
+    src: url('../fonts/Julius_Sans_One/JuliusSansOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: "font2";
+    src: url('../fonts/Orbitron/Orbitron-Bold.ttf');
+}
+
+@font-face {
+    font-family: "font3";
+    src: url('../fonts/Orbitron/Orbitron-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: "font4";
+    src: url('../fonts/Orbitron/Orbitron-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: "font5";
+    src: url('../fonts/Red_Rose/RedRose-Bold.ttf');
+}
+
+@font-face {
+    font-family: "font6";
+    src: url('../fonts/Red_Rose/RedRose-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: "font7";
+    src: url('../fonts/Red_Rose/RedRose-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: "font8";
+    src: url('../fonts/Sirin_Stencil/SirinStencil-Regular.ttf');
+}
+
+/* navbar */
 
 #navbar {
     position: fixed;
@@ -45,7 +87,9 @@ body {
     transition: transform 0.3s ease;
     z-index: 1000;
     padding: 9px 20px;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
+    background-color: #000;
+    font-family: 'font8';
 }
 
 #navbar .left-nav {
@@ -136,6 +180,63 @@ body {
     font-size: 1.2rem;
 }
 
+/* profile menu */
+.menu {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    width: 300px;
+    height: auto;
+    padding: 19px;
+    border: 1px solid #da370a85;
+    z-index: 1000;
+    border-radius: 15px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    /* display: none; */
+}
+
+.menu h3 {
+    color: white;
+    cursor: pointer;
+}
+
+.menu .menu-devider {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.119);
+}
+
+.menu .logout {
+    color: rgb(254, 3, 3);
+    text-align: center;
+    font-family: 'font8';
+    border: 1px solid rgb(254, 3, 3);
+    height: 50px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 8px;
+    border-radius: 15px;
+    background: rgba(220, 20, 60, 0.416);
+    backdrop-filter: blur(55px);
+    cursor: pointer;
+    margin: 0px auto;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.menu .closebutton{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
 /* Hero Section */
 #HeroSection {
     width: 100%;
@@ -146,6 +247,7 @@ body {
     flex-direction: column;
     gap: 45px;
     position: relative;
+
 }
 
 #HeroSection .orange {
@@ -162,6 +264,7 @@ body {
     text-align: center;
     text-transform: capitalize;
     font-weight: 200;
+    font-family: 'font8';
 }
 
 #HeroSection .blob {
@@ -178,6 +281,7 @@ body {
 #HeroSection h2 {
     color: var(--light-color);
     text-align: center;
+    font-family: 'font5';
 }
 
 .get-start {
@@ -196,6 +300,7 @@ body {
     flex-direction: column;
     border-radius: 10px;
     transition: 0.3s ease;
+    font-family: 'font5';
 }
 
 .get-start:hover {
@@ -328,8 +433,9 @@ body {
     margin-top: 1rem;
 }
 
-#courses .heading h1{
+#courses .heading h1 {
     color: var(--light-color);
+    font-family: 'font8';
 }
 
 #courses .dot {
@@ -338,7 +444,7 @@ body {
 
 /* course cards */
 
-.coursecard-container{
+.coursecard-container {
     width: 100%;
     height: auto;
     overflow-x: auto;
@@ -351,99 +457,100 @@ body {
 }
 
 .card {
-  width: 100%;
-  background: var(--dark-color);
-  border-radius: 20px;
-  overflow: hidden;
-  color: white;
-  transition: 0.4s ease;
-  border: 1px solid rgba(255, 255, 255, 0.303);
+    width: 100%;
+    background: var(--dark-color);
+    border-radius: 20px;
+    overflow: hidden;
+    color: white;
+    transition: 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.303);
 }
 
 .card:hover {
-  transform: translateY(-10px);
+    transform: translateY(-10px);
 }
 
 .card-image img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card-content {
-  padding: 25px;
+    padding: 25px;
 }
 
 .tags {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 .tags span {
-  padding: 6px 14px;
-  font-size: 12px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 14px;
+    font-size: 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 h2 {
-  margin: 0 0 20px 0;
-  font-size: 22px;
-  font-weight: 500;
+    margin: 0 0 20px 0;
+    font-size: 22px;
+    font-weight: 500;
 }
 
 .price-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .price {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .new-price {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ff6a00;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6a00;
 }
 
 .old-price {
-  font-size: 14px;
-  text-decoration: line-through;
-  color: #aaa;
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #aaa;
 }
 
 .discount {
-  background: white;
-  color: black;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
+    background: white;
+    color: black;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 6px;
 }
 
 .btn {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-  transition: 0.3s ease;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .btn:hover {
-  background: #ff6a00;
-  border: none;
+    background: #ff6a00;
+    border: none;
 }
+
 /* course cards end */
 
 /* review section */
@@ -456,6 +563,11 @@ h2 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+}
+
+.reviews h1 {
+    font-family: 'font8';
 }
 
 .reviewheading span {
@@ -666,4 +778,23 @@ h2 {
 
 .faq-item.active .arrow {
     transform: rotate(180deg);
+}
+
+
+#footer{
+    width: 100%;
+    height: 80px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.179);
+}
+
+#footer span{
+    color: #DA360A;
+}
+
+#footer p{
+    color: white;
 }
