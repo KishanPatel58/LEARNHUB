@@ -46,6 +46,7 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
+
         cursor = db.cursor(dictionary=True)
         cursor.execute(
             "SELECT * FROM users WHERE email=%s",
@@ -58,6 +59,7 @@ def login():
             session["email"] = user["email"]
             session["contactno"] = user["contactno"]
             session["id"] = user["id"]
+
             return redirect(url_for("home"))
         else:
             return render_template("signin.html",errormessage="Invalid Email of Password..")
@@ -65,12 +67,16 @@ def login():
 # course page
 @app.route("/frontend.html")
 def frontend():
-
+    session["oldprice"] = "4999"
+    session["newprice"] = "1999"
+    session["discount"] = "60"
     session["coursename"] = "Frontend Domination"
+
     username = session.get("username")
     user_id = session.get("id")
     course_name = "Frontend Domination"
-
+    print("USER ID:", user_id)
+    print("USERNAME:", username)
     db = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -79,21 +85,50 @@ def frontend():
     )
     cursor = db.cursor()
 
-    # Check if user already visited
+    # -----------------------------
+    # 1️⃣ Get existing courses
+    # -----------------------------
+    cursor.execute(
+        "SELECT course FROM users WHERE username = %s",
+        (username,)
+    )
+    result = cursor.fetchone()
+
+    if result and result[0]:
+        existing_courses = result[0].split(",")
+
+        # If course not already added
+        if course_name not in existing_courses:
+            updated_courses = result[0] + "," + course_name
+
+            cursor.execute(
+                "UPDATE users SET course = %s WHERE username = %s",
+                (updated_courses, username)
+            )
+    else:
+        # First course
+        cursor.execute(
+            "UPDATE users SET course = %s WHERE username = %s",
+            (course_name, username)
+        )
+
+    db.commit()
+
+    # -----------------------------
+    # 2️⃣ Check visit table
+    # -----------------------------
     cursor.execute(
         "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
         (user_id, course_name)
     )
-    result = cursor.fetchone()
+    visit = cursor.fetchone()
 
-    if not result:
-        # Insert visit record
+    if not visit:
         cursor.execute(
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
 
-        # Increase visit count
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -108,9 +143,12 @@ def frontend():
 
 # course page
 @app.route("/threejs.html")
-def three():
-
+def threejs():
+    session["oldprice"] = "5999"
+    session["newprice"] = "2499"
+    session["discount"] = "58"
     session["coursename"] = "Three.js Domination"
+
     username = session.get("username")
     user_id = session.get("id")
     course_name = "Three.js Domination"
@@ -123,21 +161,50 @@ def three():
     )
     cursor = db.cursor()
 
-    # Check if user already visited
+    # -----------------------------
+    # 1️⃣ Get existing courses
+    # -----------------------------
+    cursor.execute(
+        "SELECT course FROM users WHERE username = %s",
+        (username,)
+    )
+    result = cursor.fetchone()
+
+    if result and result[0]:
+        existing_courses = result[0].split(",")
+
+        # If course not already added
+        if course_name not in existing_courses:
+            updated_courses = result[0] + "," + course_name
+
+            cursor.execute(
+                "UPDATE users SET course = %s WHERE username = %s",
+                (updated_courses, username)
+            )
+    else:
+        # First course
+        cursor.execute(
+            "UPDATE users SET course = %s WHERE username = %s",
+            (course_name, username)
+        )
+
+    db.commit()
+
+    # -----------------------------
+    # 2️⃣ Check visit table
+    # -----------------------------
     cursor.execute(
         "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
         (user_id, course_name)
     )
-    result = cursor.fetchone()
+    visit = cursor.fetchone()
 
-    if not result:
-        # Insert visit record
+    if not visit:
         cursor.execute(
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
 
-        # Increase visit count
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -153,8 +220,11 @@ def three():
 # course page
 @app.route("/fullstack.html")
 def fullstack():
-
+    session["oldprice"] = "7999"
+    session["newprice"] = "3499"
+    session["discount"] = "56"
     session["coursename"] = "Fullstack Development"
+
     username = session.get("username")
     user_id = session.get("id")
     course_name = "Fullstack Development"
@@ -167,21 +237,50 @@ def fullstack():
     )
     cursor = db.cursor()
 
-    # Check if user already visited
+    # -----------------------------
+    # 1️⃣ Get existing courses
+    # -----------------------------
+    cursor.execute(
+        "SELECT course FROM users WHERE username = %s",
+        (username,)
+    )
+    result = cursor.fetchone()
+
+    if result and result[0]:
+        existing_courses = result[0].split(",")
+
+        # If course not already added
+        if course_name not in existing_courses:
+            updated_courses = result[0] + "," + course_name
+
+            cursor.execute(
+                "UPDATE users SET course = %s WHERE username = %s",
+                (updated_courses, username)
+            )
+    else:
+        # First course
+        cursor.execute(
+            "UPDATE users SET course = %s WHERE username = %s",
+            (course_name, username)
+        )
+
+    db.commit()
+
+    # -----------------------------
+    # 2️⃣ Check visit table
+    # -----------------------------
     cursor.execute(
         "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
         (user_id, course_name)
     )
-    result = cursor.fetchone()
+    visit = cursor.fetchone()
 
-    if not result:
-        # Insert visit record
+    if not visit:
         cursor.execute(
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
 
-        # Increase visit count
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -197,8 +296,11 @@ def fullstack():
 # course page
 @app.route("/dsa.html")
 def dsa():
-
+    session["oldprice"] = "3999"
+    session["newprice"] = "1499"
+    session["discount"] = "62"
     session["coursename"] = "DSA with JS"
+
     username = session.get("username")
     user_id = session.get("id")
     course_name = "DSA with JS"
@@ -211,21 +313,50 @@ def dsa():
     )
     cursor = db.cursor()
 
-    # Check if user already visited
+    # -----------------------------
+    # 1️⃣ Get existing courses
+    # -----------------------------
+    cursor.execute(
+        "SELECT course FROM users WHERE username = %s",
+        (username,)
+    )
+    result = cursor.fetchone()
+
+    if result and result[0]:
+        existing_courses = result[0].split(",")
+
+        # If course not already added
+        if course_name not in existing_courses:
+            updated_courses = result[0] + "," + course_name
+
+            cursor.execute(
+                "UPDATE users SET course = %s WHERE username = %s",
+                (updated_courses, username)
+            )
+    else:
+        # First course
+        cursor.execute(
+            "UPDATE users SET course = %s WHERE username = %s",
+            (course_name, username)
+        )
+
+    db.commit()
+
+    # -----------------------------
+    # 2️⃣ Check visit table
+    # -----------------------------
     cursor.execute(
         "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
         (user_id, course_name)
     )
-    result = cursor.fetchone()
+    visit = cursor.fetchone()
 
-    if not result:
-        # Insert visit record
+    if not visit:
         cursor.execute(
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
 
-        # Increase visit count
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -241,11 +372,16 @@ def dsa():
 # course page
 @app.route("/backend.html")
 def backend():
-
+    session["oldprice"] = "6999"
+    session["newprice"] = "2999"
+    session["discount"] = "57"
     session["coursename"] = "Backend Development"
+
     username = session.get("username")
     user_id = session.get("id")
     course_name = "Backend Development"
+    print("Logged in user ID:", user_id)
+    print("Course:", course_name)
 
     db = mysql.connector.connect(
         host="localhost",
@@ -255,21 +391,50 @@ def backend():
     )
     cursor = db.cursor()
 
-    # Check if user already visited
+    # -----------------------------
+    # 1️⃣ Get existing courses
+    # -----------------------------
+    cursor.execute(
+        "SELECT course FROM users WHERE username = %s",
+        (username,)
+    )
+    result = cursor.fetchone()
+
+    if result and result[0]:
+        existing_courses = result[0].split(",")
+
+        # If course not already added
+        if course_name not in existing_courses:
+            updated_courses = result[0] + "," + course_name
+
+            cursor.execute(
+                "UPDATE users SET course = %s WHERE username = %s",
+                (updated_courses, username)
+            )
+    else:
+        # First course
+        cursor.execute(
+            "UPDATE users SET course = %s WHERE username = %s",
+            (course_name, username)
+        )
+
+    db.commit()
+
+    # -----------------------------
+    # 2️⃣ Check visit table
+    # -----------------------------
     cursor.execute(
         "SELECT * FROM course_visits WHERE user_id=%s AND course_name=%s",
         (user_id, course_name)
     )
-    result = cursor.fetchone()
+    visit = cursor.fetchone()
 
-    if not result:
-        # Insert visit record
+    if not visit:
         cursor.execute(
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
 
-        # Increase visit count
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -293,6 +458,8 @@ def profile():
     email = session.get("email")
     contactno = session.get("contactno")
     return render_template("profile.html",username=username,email=email,contactno=contactno)
+
+
 # Logout Route
 @app.route("/logout")
 def logout():
