@@ -19,7 +19,6 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-
         # Check if email exists and password matches
         if email in USER_DB and USER_DB[email] == password:
             session['user'] = email  # Store user in session
