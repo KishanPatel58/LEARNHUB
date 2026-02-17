@@ -1,6 +1,9 @@
 import mysql.connector
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
+import matplotlib.pyplot as plt
+import io
+import base64
 
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
@@ -128,7 +131,7 @@ def frontend():
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
-
+        db.commit()
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -204,14 +207,12 @@ def threejs():
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
-
+        db.commit()
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
         )
-
         db.commit()
-
     cursor.close()
     db.close()
 
@@ -280,7 +281,7 @@ def fullstack():
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
-
+        db.commit()
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -356,7 +357,7 @@ def dsa():
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
-
+        db.commit()
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -434,7 +435,7 @@ def backend():
             "INSERT INTO course_visits (user_id, course_name) VALUES (%s, %s)",
             (user_id, course_name)
         )
-
+        db.commit()
         cursor.execute(
             "UPDATE course SET studentenrolled = studentenrolled + 1 WHERE coursename=%s",
             (course_name,)
@@ -459,6 +460,38 @@ def profile():
     contactno = session.get("contactno")
     return render_template("profile.html",username=username,email=email,contactno=contactno)
 
+# progress route
+@app.route("/progress")
+def progress():
+
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT coursename, studentenrolled FROM course")
+    data = cursor.fetchall()
+    cursor.close()
+
+    courses = [row["coursename"] for row in data]
+    students = [row["studentenrolled"] for row in data]
+
+    # Create Plot
+    fig, ax = plt.subplots(figsize=(15, 9))
+    ax.plot(courses, students, marker='o', linewidth=2, color='#DA360A')
+    fig.patch.set_facecolor('#000')   # Full background
+    ax.set_facecolor('#000') 
+    ax.set_title("Students Enrolled Per Course",color="#DA360A")
+    ax.set_xlabel("Course Name",color="#DA360A")
+    ax.set_ylabel("Students Enrolled",color="#DA360A")
+    # plt.xticks(rotation=30)
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    # plt.grid()
+    # Save plot to memory
+    img = io.BytesIO()
+    plt.savefig(img, format='png')
+    img.seek(0)
+    # Convert to Base64
+    plot_url = base64.b64encode(img.getvalue()).decode()
+    plt.close()
+    return render_template("progress.html", plot_url=plot_url)
 
 # Logout Route
 @app.route("/logout")
