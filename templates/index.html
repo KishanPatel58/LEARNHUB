@@ -27,15 +27,15 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#courses">
                     <span class="text top">Courses</span>
                     <span class="text bottom">Courses</span>
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <span class="text top">Bootcamp</span>
-                    <span class="text bottom">Bootcamp</span>
+                <a href="#review-section">
+                    <span class="text top">Review</span>
+                    <span class="text bottom">Review</span>
                 </a>
             </li>
             <li>
@@ -46,9 +46,20 @@
             </li>
         </ul>
         <div class="right-nav">
-            <a href="/login">Sign in</a>
+            {% if user %}
+
+            <a href="" id="usernames" title="logout">{{user}}</a>
+            {% else %}
+            <a href="/login">Login</a>
+            {% endif %}
         </div>
     </nav>
+    <div class="menu" id="profile-menu">
+        <h1 class="closebutton" style="color: white;"><i class="ri-close-circle-line"></i></h1>
+        <h3 onclick="window.location.href='/profile'">Profile <i class="ri-shield-user-line"></i></h3>
+        <hr class="menu-devider">
+        <h1 class="logout" onclick="window.location.href='/logout'">Logout</h1>
+    </div>
 
     <section id="HeroSection">
         <div class="blob"></div>
@@ -63,7 +74,7 @@
             want to hire!
         </h1>
         <h2>Join a growing community of students preparing for real-world tech career at <br>LearnHub.</h2>
-        <button class="get-start">
+        <button class="get-start" onclick="window.location.href='/#courses'">
             <span class="text top">Get Start <i class="ri-arrow-right-long-fill"></i></span>
             <span class="text bottom">Get Start <i class="ri-arrow-right-long-fill"></i></span>
         </button>
@@ -75,7 +86,7 @@
             <div class="dot green"></div>
         </div>
         <div class="video-container">
-            <video controls autoplay muted loop>
+            <video autoplay muted loop>
                 <source src="https://www.pexels.com/download/video/4709297/">
             </video>
         </div>
@@ -116,7 +127,7 @@
 
         </div>
     </section>
-    <section class="reviews">
+    <section class="reviews" id="review-section">
         <span class="heading-box reviewheading">
             <h1>What our <span>Students</span> say ?</h1>
             <span class="dot tl"></span>
@@ -142,12 +153,16 @@
         </span>
         <div class="faq-container" id="faq-container">
             <!-- dynamic by javascript -->
-            
+
         </div>
+    </section>
+    <section id="footer">
+        <p>M@de by <span>LearnHub</span> & Team</p>
     </section>
     <script src="../static/js/script.js"></script>
     <script src="../static/js/review.js"></script>
     <script src="../static/js/faq.js"></script>
+    <script src="../static/js/cards.js"></script>
 </body>
 
 </html>

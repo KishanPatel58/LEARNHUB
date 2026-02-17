@@ -1,46 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background: #050505; color: white; }
-        .glass-box { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../static/images/open-book.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="../static/css/form.css">
+    <title>LearnHub | Sign In</title>
 </head>
-<body class="flex items-center justify-center min-h-screen">
 
-    <div class="glass-box p-12 rounded-[2.5rem] w-full max-w-md shadow-2xl">
-        <h1 class="text-3xl text-center font-black mb-2 tracking-tighter">Welcome Back.</h1>
+<body>
 
-        {% if error %}
-        <div class="bg-red-500/10 border border-red-500/50 text-red-500 p-4 rounded-xl mb-6 text-sm">
-            {{ error }}
-        </div>
-        {% endif %}
-
-        <form action="/login" method="POST" class="space-y-6">
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Email Address</label>
-                <input type="email" name="email" required 
-                    class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-indigo-500 transition">
+    <div class="container">
+        <h2>Sign In</h2>
+        <form method="POST">
+            <p style="color: red;text-align: center; margin-bottom: 10px;">{{errormessage}}</p>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" name="email" placeholder="johndoe@gmail.com" required>
+                <p id="emailmessage"></p>
+            </div>
+            <div class="input-group password-wrapper">
+                <label>Password</label>
+                <div class="password-field">
+                    <input type="password" name="password" id="password" placeholder="Enter password" required>
+                    <span id="togglePassword"><i class="ri-eye-line"></i></span>
+                </div>
+                <p id="passwordmessage"></p>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Password</label>
-                <input type="password" name="password" required 
-                    class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:outline-none focus:border-indigo-500 transition">
-            </div>
+            <button disabled type="submit" id="submitbutton" class="btn">Login</button>
 
-            <button type="submit" 
-                class="w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-2xl font-bold shadow-lg shadow-indigo-600/20 transition duration-300">
-                Sign In
-            </button>
+            <div class="extra">
+                Don’t have an account? <a href="/signup">Register</a>
+            </div>
         </form>
+        <script>
+            const email = document.getElementById("email");
+            const password = document.getElementById("password");
+            const emailmessage = document.getElementById("emailmessage");
+            const passwordmessage = document.getElementById("passwordmessage");
+            const togglePassword = document.getElementById("togglePassword");
+            const submitbutton = document.getElementById("submitbutton");
 
-        <p class="text-center mt-8 text-gray-500 text-sm">
-            Don't have an account? <a href="#" class="text-indigo-400 hover:underline">Register</a>
-        </p>
+            // Patterns
+            const emailpat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordpattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+            // Disable button initially
+            submitbutton.disabled = true;
+
+            // ✅ EMAIL VALIDATION
+            email.addEventListener("input", () => {
+                const value = email.value.trim();
+
+                if (emailpat.test(value)) {
+                    emailmessage.innerHTML =
+                        '<i style="color:green;" class="ri-shield-check-line"></i> Email is valid';
+                } else {
+                    emailmessage.innerHTML =
+                        '<i style="color:crimson;" class="ri-close-circle-line"></i> Email is not valid';
+                }
+
+                checkForm();
+            });
+
+            // ✅ PASSWORD VALIDATION
+            password.addEventListener("input", () => {
+                const value = password.value.trim();
+
+                if (passwordpattern.test(value)) {
+                    passwordmessage.innerHTML =
+                        '<i style="color:green;" class="ri-shield-check-line"></i> Password is strong';
+                } else {
+                    passwordmessage.innerHTML =
+                        '<i style="color:crimson;" class="ri-close-circle-line"></i> Password must contain 8 characters, uppercase, lowercase, number & symbol';
+                }
+
+                checkForm();
+            });
+
+            // ✅ ENABLE / DISABLE BUTTON PROPERLY
+            function checkForm() {
+                const isEmailValid = emailpat.test(email.value.trim());
+                const isPasswordValid = passwordpattern.test(password.value.trim());
+
+                submitbutton.disabled = !(isEmailValid && isPasswordValid);
+            }
+
+            togglePassword.addEventListener("click", function () {
+
+                if (password.type === "password") {
+                    password.type = "text";
+                    togglePassword.innerHTML = '<i class="ri-eye-off-line"></i>';
+                } else {
+                    password.type = "password";
+                    togglePassword.innerHTML = '<i class="ri-eye-line"></i>';
+                }
+
+            });
+
+        </script>
     </div>
 
 </body>
+
 </html>

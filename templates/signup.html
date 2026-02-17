@@ -1,12 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/css/form.css">
+    <title>Sign Up</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/open-book.jpg" type="image/x-icon">
+
+    <style>
+        /* Your Same CSS Here */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f0f0f;
+        }
+
+        .container {
+            width: 360px;
+            padding: 40px;
+            border-radius: 15px;
+            background: #1c1c1c;
+            box-shadow: 0 0 25px rgba(255, 136, 0, 0.15);
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #ff8800;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #2a2a2a;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff8800;
+            box-shadow: 0 0 10px rgba(255, 136, 0, 0.4);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #ff8800;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #e67600;
+            box-shadow: 0 0 15px rgba(255, 136, 0, 0.6);
+        }
+
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .extra {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .extra a {
+            color: #ff8800;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .extra a:hover {
+            text-decoration: underline;
+        }
+
+        .password-field {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-field input {
+            width: 100%;
+            padding-right: 40px;
+        }
+
+        .togglePassword {
+            position: absolute;
+            right: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #aaa;
+            transition: 0.3s;
+        }
+
+        .togglePassword:hover {
+            color: #ff8800;
+        }
+    </style>
 </head>
+
 <body>
-    
+
+    <div class="container">
+        <h2>Sign Up</h2>
+
+        <form method="POST">
+            <div class="input-group">
+                <label>User Name</label>
+                <input type="text" placeholder="John Doe" name="username" required>
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" placeholder="johndoe@gmail.com" name="email" required>
+            </div>
+            <div class="input-group">
+                <label>Contact No.</label>
+                <input type="number" placeholder="9974597222" name="contactno" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <div class="password-field">
+                    <input type="password" name="password" id="password" placeholder="Johndoe@123" required>
+                    <span class="togglePassword" data-target="password">
+                        <i class="ri-eye-line"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <div class="password-field">
+                    <input type="password" name="confirmpassword" id="confirmPassword" placeholder="Johndoe@123" required>
+                    <span class="togglePassword" data-target="confirmPassword">
+                        <i class="ri-eye-line"></i>
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Create Account</button>
+
+            <div class="extra">
+                Already have an account? <a href="/login">Login</a>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        const email = document.querySelector('input[type="email"]');
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirmPassword");
+        const submitBtn = document.querySelector(".btn");
+
+        // Create message elements dynamically
+        const emailMsg = document.createElement("p");
+        const passMsg = document.createElement("p");
+        const confirmMsg = document.createElement("p");
+        emailMsg.style.color = "white"
+        emailMsg.style.marginTop = "10px"
+        passMsg.style.color = "white"
+        passMsg.style.marginTop = "10px"
+        confirmMsg.style.color = "white"
+        confirmMsg.style.marginTop = "10px"
+
+        email.parentNode.appendChild(emailMsg);
+        password.closest(".input-group").appendChild(passMsg);
+        confirmPassword.closest(".input-group").appendChild(confirmMsg);
+
+        // Patterns
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+        submitBtn.disabled = true;
+
+        // Email validation
+        email.addEventListener("input", () => {
+            if (emailPattern.test(email.value.trim())) {
+                emailMsg.innerHTML = '<i style="color:green;" class="ri-shield-check-line"></i> Email is valid';
+            } else {
+                emailMsg.innerHTML = '<i style="color:crimson;" class="ri-close-circle-line"></i> Enter valid email';
+            }
+            checkForm();
+        });
+
+        // Password validation
+        password.addEventListener("input", () => {
+            if (passwordPattern.test(password.value.trim())) {
+                passMsg.innerHTML = '<i style="color:green;" class="ri-shield-check-line"></i> Strong password';
+            } else {
+                passMsg.innerHTML = '<i style="color:crimson;" class="ri-close-circle-line"></i> 8+ chars, uppercase, lowercase, number & symbol required';
+            }
+            checkForm();
+        });
+
+        // Confirm password match
+        confirmPassword.addEventListener("input", () => {
+            if (confirmPassword.value === password.value && confirmPassword.value !== "") {
+                confirmMsg.innerHTML = '<i style="color:green;" class="ri-shield-check-line"></i> Passwords match';
+            } else {
+                confirmMsg.innerHTML = '<i style="color:crimson;" class="ri-close-circle-line"></i> Passwords do not match';
+            }
+            checkForm();
+        });
+
+        // Enable button only if all valid
+        function checkForm() {
+            const emailValid = emailPattern.test(email.value.trim());
+            const passwordValid = passwordPattern.test(password.value.trim());
+            const passwordsMatch = password.value === confirmPassword.value && password.value !== "";
+
+            submitBtn.disabled = !(emailValid && passwordValid && passwordsMatch);
+        }
+
+        // PASSWORD TOGGLE FUNCTIONALITY
+        const toggles = document.querySelectorAll(".togglePassword");
+
+        toggles.forEach(toggle => {
+            toggle.addEventListener("click", function () {
+
+                const targetId = this.getAttribute("data-target");
+                const input = document.getElementById(targetId);
+                const icon = this.querySelector("i");
+
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove("ri-eye-line");
+                    icon.classList.add("ri-eye-off-line");
+                } else {
+                    input.type = "password";
+                    icon.classList.remove("ri-eye-off-line");
+                    icon.classList.add("ri-eye-line");
+                }
+
+            });
+        });
+
+    </script>
+
+
 </body>
+
 </html>

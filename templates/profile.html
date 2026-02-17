@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- remix icons cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <title>LearnHub | {{username}}</title>
+</head>
+
+<body>
+    <div class="profile-card">
+        <a href="/" title="Back to Home"><i class="ri-arrow-left-long-fill"></i> Back</a>
+        <img src="../static/images/user.jpg" class="profile-img" alt="Profile">
+
+        <h2>{{ username }}</h2>
+        
+        <hr>
+        
+        <div class="info">
+            <strong>Contact:</strong><br>
+            <span>{{ session.contactno }}</span><br><br>
+            <strong>Email:</strong>
+            <div class="email">{{ email }}</div>
+        </div>
+
+        <button class="btn edit-btn">Edit Profile</button>
+        <button class="btn logout-btn" onclick="window.location.href='/logout'">Logout</button>
+    </div>
+</body>
+
+</html>
