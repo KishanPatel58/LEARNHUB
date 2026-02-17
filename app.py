@@ -486,11 +486,11 @@ def progress():
     data = cursor.fetchall()
     cursor.close()
 
-    # 🔥 SORT data first (important for binary search)
+    # SORT data first (important for binary search)
     sorted_data = sorted(data, key=lambda x: x["studentenrolled"])
 
-    # 🔍 Example: search course with 5 enrolled students
-    search_target = 4   # you can change this
+    # Example: search course with 5 enrolled students
+    search_target = 4   
     found_course = binary_search(sorted_data, search_target)
 
     if found_course:
