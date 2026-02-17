@@ -7,6 +7,22 @@ import base64
 
 app = Flask(__name__)
 app.secret_key = "super_secret_key"
+def binary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid]["studentenrolled"] == target:
+            return arr[mid]
+
+        elif arr[mid]["studentenrolled"] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return None
 
 # MySQL Connection
 db = mysql.connector.connect(
@@ -31,6 +47,7 @@ def register():
         email = request.form["email"]
         password = request.form["password"]
         session["username"] = username
+        session["email"] = email
         hashed_password = generate_password_hash(password)
         cursor = db.cursor()
         cursor.execute(
@@ -469,28 +486,45 @@ def progress():
     data = cursor.fetchall()
     cursor.close()
 
-    courses = [row["coursename"] for row in data]
-    students = [row["studentenrolled"] for row in data]
+    # 🔥 SORT data first (important for binary search)
+    sorted_data = sorted(data, key=lambda x: x["studentenrolled"])
+
+    # 🔍 Example: search course with 5 enrolled students
+    search_target = 4   # you can change this
+    found_course = binary_search(sorted_data, search_target)
+
+    if found_course:
+        print("Found Course:", found_course["coursename"])
+    else:
+        print("Course not found")
+
+    courses = [row["coursename"] for row in sorted_data]
+    students = [row["studentenrolled"] for row in sorted_data]
 
     # Create Plot
     fig, ax = plt.subplots(figsize=(15, 9))
     ax.plot(courses, students, marker='o', linewidth=2, color='#DA360A')
-    fig.patch.set_facecolor('#000')   # Full background
-    ax.set_facecolor('#000') 
-    ax.set_title("Students Enrolled Per Course",color="#DA360A")
-    ax.set_xlabel("Course Name",color="#DA360A")
-    ax.set_ylabel("Students Enrolled",color="#DA360A")
-    # plt.xticks(rotation=30)
+
+    fig.patch.set_facecolor('#000')
+    ax.set_facecolor('#000')
+
+    ax.set_title("Students Enrolled Per Course", color="#DA360A")
+    ax.set_xlabel("Course Name", color="#DA360A")
+    ax.set_ylabel("Students Enrolled", color="#DA360A")
+
     ax.tick_params(axis='x', colors='white')
     ax.tick_params(axis='y', colors='white')
-    # plt.grid()
-    # Save plot to memory
+
+    plt.xticks(rotation=30)
+    plt.tight_layout()
+
     img = io.BytesIO()
     plt.savefig(img, format='png')
     img.seek(0)
-    # Convert to Base64
+
     plot_url = base64.b64encode(img.getvalue()).decode()
     plt.close()
+
     return render_template("progress.html", plot_url=plot_url)
 
 # Logout Route

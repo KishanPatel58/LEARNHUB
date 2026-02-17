@@ -18,6 +18,7 @@ window.addEventListener("scroll", () => {
 const menu = document.getElementById("usernames")
 const profilemenu = document.getElementById("profile-menu")
 const closebutton = document.querySelector(".closebutton")
+const logout = document.querySelector(".logout")
 menu.addEventListener("click",(e)=>{
     e.preventDefault();
     profilemenu.style.display="flex";
@@ -26,4 +27,8 @@ menu.addEventListener("click",(e)=>{
 })
 closebutton.addEventListener("click",()=>{
     profilemenu.style.display="none"
+})
+
+logout.addEventListener("click",()=>{
+    localStorage.clear();
 })
