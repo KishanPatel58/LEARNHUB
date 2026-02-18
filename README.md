@@ -32,26 +32,6 @@ It allows students to register, log in, access courses, and track course engagem
 
 ---
 
-## 📂 Project Structure
-### LEARNHUB/
-### │
-### ├── static/
-### │ ├── css/
-### │ └── images/
-### │
-### ├── templates/
-### │ ├── login.html
-### │ ├── signup.html
-### │ ├── profile.html
-### │ ├── frontend.html
-### │
-### ├── app.py
-### ├── requirements.txt
-### └── README.md
-
-
----
-
 ## 🧠 Database Structure
 
 ### Users Table
