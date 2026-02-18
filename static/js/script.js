@@ -1,5 +1,6 @@
 let lastScrollY = window.scrollY;
 const navbar = document.getElementById("navbar");
+const movetop = document.querySelector(".move-to-top")
 
 window.addEventListener("scroll", () => {
     const currentScrollY = window.scrollY;
@@ -10,6 +11,11 @@ window.addEventListener("scroll", () => {
     } else {
         // scrolling DOWN → show navbar
         navbar.style.transform = "translateY(0)";
+    }
+    if (window.scrollY > 200) {
+        movetop.style.right = "10px";
+    } else {
+        movetop.style.right = "-100%";
     }
 
     lastScrollY = currentScrollY;
@@ -40,7 +46,7 @@ const menuicon = document.querySelector(".menu-icon");
 const dropdownmenu = document.querySelector(".dropdown-menu");
 
 menuicon.addEventListener("click",()=>{
-    dropdownmenu.style.left="0%"
+    dropdownmenu.style.left="0%";
 })
 dropdownmenu.addEventListener("click",()=>{
     dropdownmenu.style.left="-100%"

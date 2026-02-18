@@ -1,3 +1,6 @@
+*{
+    user-select: none;
+}
 .heading-box {
     position: relative;
     border: 1px solid #DA360A;

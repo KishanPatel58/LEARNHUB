@@ -464,7 +464,9 @@ def backend():
     db.close()
 
     return render_template("backend.html", username=username)
-
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 @app.route("/course")
 def course():
     coursename = session.get("coursename")
