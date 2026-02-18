@@ -502,7 +502,7 @@ def progress():
     students = [row["studentenrolled"] for row in sorted_data]
 
     # Create Plot
-    fig, ax = plt.subplots(figsize=(15, 9))
+    fig, ax = plt.subplots(figsize=(15, 7))
     ax.plot(courses, students, marker='o', linewidth=2, color='#DA360A')
 
     fig.patch.set_facecolor('#000')

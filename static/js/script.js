@@ -18,7 +18,7 @@ window.addEventListener("scroll", () => {
 const menu = document.getElementById("usernames")
 const profilemenu = document.getElementById("profile-menu")
 const closebutton = document.querySelector(".closebutton")
-const logout = document.querySelector(".logout")
+const logout = document.querySelectorAll(".logout")
 menu.addEventListener("click",(e)=>{
     e.preventDefault();
     profilemenu.style.display="flex";
@@ -29,6 +29,19 @@ closebutton.addEventListener("click",()=>{
     profilemenu.style.display="none"
 })
 
-logout.addEventListener("click",()=>{
-    localStorage.clear();
+logout.forEach(element=>{
+    element.addEventListener("click",()=>{
+        localStorage.clear();
+    })
+})
+
+// responsive time
+const menuicon = document.querySelector(".menu-icon");
+const dropdownmenu = document.querySelector(".dropdown-menu");
+
+menuicon.addEventListener("click",()=>{
+    dropdownmenu.style.left="0%"
+})
+dropdownmenu.addEventListener("click",()=>{
+    dropdownmenu.style.left="-100%"
 })

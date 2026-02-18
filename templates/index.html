@@ -53,6 +53,7 @@
             <a href="/login">Login</a>
             {% endif %}
         </div>
+        <h1 class="menu-icon"><i class="ri-menu-4-line"></i></h1>
     </nav>
     <div class="menu" id="profile-menu">
         <h1 class="closebutton" style="color: white;"><i class="ri-close-circle-line"></i></h1>
@@ -60,7 +61,45 @@
         <hr class="menu-devider">
         <h1 class="logout" onclick="window.location.href='/logout'">Logout</h1>
     </div>
-
+    <!-- dropdown menu -->
+    <div class="dropdown-menu">
+        <div class="close-btn-div">
+            <h1 class="close-btn"><i class="ri-close-circle-line"></i></h1>
+        </div>
+        <div class="content">
+            <li>
+                <a href="#">
+                    <span class="text top">Home</span>
+                    <span class="text bottom">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#courses">
+                    <span class="text top">Courses</span>
+                    <span class="text bottom">Courses</span>
+                </a>
+            </li>
+            <li>
+                <a href="#review-section">
+                    <span class="text top">Review</span>
+                    <span class="text bottom">Review</span>
+                </a>
+            </li>
+            <li>
+                <a href="progress">
+                    <span class="text top">LHB Progress</span>
+                    <span class="text bottom">LHB Progress</span>
+                </a>
+            </li>
+            <li>
+                <a href="/profile">
+                    <span class="text top">Profile <i class="ri-user-line"></i></span>
+                    <span class="text bottom">Profile <i class="ri-user-line"></i></span>
+                </a>
+            </li>
+            <button class="logout">Logout</button>
+        </div>
+    </div>
     <section id="HeroSection">
         <div class="blob"></div>
         <h1 class="orange">learn. build. getplaced.</h1>

@@ -29,6 +29,7 @@ body {
 body {
     background-color: var(--dark-color);
     font-family: var(--sans-serif);
+    overflow-x: hidden;
 }
 
 /* font declaration */
@@ -209,7 +210,7 @@ body {
     background-color: rgba(255, 255, 255, 0.119);
 }
 
-.menu .logout {
+.logout {
     color: rgb(254, 3, 3);
     text-align: center;
     font-family: 'font8';
@@ -797,4 +798,134 @@ h2 {
 
 #footer p{
     color: white;
+}
+
+.menu-icon{
+    color: var(--light-color);
+    font-size: 1.3rem;
+    display: none;
+}
+
+.dropdown-menu{
+    height: 100vh;
+    width: 400px;
+    position: absolute;
+    top: 0%;
+    left: -100%;
+    z-index: 1000;
+    background-color: #000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid rgba(255, 255, 255, 0.221);
+    transition: 0.3s linear;
+}
+
+.close-btn-div{
+    height: 10%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.content{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.content li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content li a {
+    position: relative;
+    height: 26px;
+    /* match line-height */
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+}
+.content li a:hover .top {
+    transform: translateY(-100%);
+}
+
+.content li a:hover .bottom {
+    transform: translateY(-100%);
+}
+.close-btn{
+    color: #DA360A;
+    font-size: 1.3rem;
+    font-weight: 100;
+}
+
+/* responsive */
+
+@media (max-width:1246px) {
+    .coursecard-container{
+        grid-template-columns: 1fr 1fr;
+        /* grid-row-gap: 15px; */
+    }
+    .left-blob{
+        left: -400px !important;
+    }
+    .right-blob{
+        right: -400px !important;
+    }
+}
+
+@media (max-width:904px) {
+    .coursecard-container{
+        grid-template-columns: 1fr;
+    }
+    #FAQ{
+        width: 100%;
+    }
+    .faq-container{
+        width: 100%;
+        padding: 0px 15px;
+    }
+    .faq-item{
+        width: 100% !important;
+    }
+}
+
+@media (max-width:888px) {
+    .center-nav{
+        display: none !important;
+    }
+    .right-nav{
+        display: none !important;
+    }
+    .menu-icon{
+        display: flex;
+    }
+    .dropdown-menu{
+        display: flex;
+    }
+    .left-blob{
+        left: -450px !important;
+    }
+    .right-blob{
+        right: -460px !important;
+    }
+}
+
+@media (max-width:610px) {
+    #HeroSection{
+        margin-top: 13vw;
+        width: 100% !important;
+    }
+    .main-heading{
+        font-size: 9vw !important;
+    }
+    .video{
+        width: 95%;
+    }
 }
